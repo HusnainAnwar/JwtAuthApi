@@ -20,7 +20,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $fillable = [
         'name',
-        'phone',
+        'email',
         'password',
     ];
 
@@ -40,29 +40,10 @@ class User extends Authenticatable implements JWTSubject
      * @var array<string, string>
      */
     protected $casts = [
-        'phone_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function userPhoneVerified()
-{
-  return ! is_null($this->phone_verified_at);
-}
-
-public function phoneVerifiedAt()
-{
-  return $this->forceFill([
-     'phone_verified_at' => $this->freshTimestamp(),
-  ])->save();
-}
-
-     // add two methods below
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
+     
     public function getJWTIdentifier()
     {
         return $this->getKey();
