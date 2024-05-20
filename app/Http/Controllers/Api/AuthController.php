@@ -27,7 +27,7 @@ class AuthController extends Controller
 // dd($request->name);
         $user = $this->user::create([
             'name' => $request->name,
-            'phone_number' => 'required|unique:users|regex:/[0-9]{10}/',
+            'email' => $request['email'],
             'password' => bcrypt($request['password']),
         ]);
 
@@ -52,7 +52,7 @@ class AuthController extends Controller
     }
 
     
-    public function login(Request $request)
+    public function Userlogin(Request $request)
     {
         $this->validate($request, [
             'email' => 'required|string',
@@ -86,7 +86,7 @@ class AuthController extends Controller
         }
     }
 
-    public function logout()
+    public function Userlogout()
     {
         // get token
         $token = JWTAuth::getToken();
